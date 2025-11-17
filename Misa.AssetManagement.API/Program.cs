@@ -1,4 +1,5 @@
 using Misa.AssetManagement.Core.Entities;
+using Misa.AssetManagement.Core.Exceptions;
 using Misa.AssetManagement.Core.Interfaces.Repositories;
 using Misa.AssetManagement.Core.Interfaces.Services;
 using Misa.AssetManagement.Core.Services;
@@ -27,6 +28,7 @@ builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 
 var app = builder.Build();
+app.UseMiddleware<ValidateExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

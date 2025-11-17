@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
 using Misa.AssetManagement.Core.Interfaces.Repositories;
+using Misa.AssetManagement.Core.MISAAttributes;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -29,8 +30,8 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            var tableAttr = typeof(T).GetCustomAttribute<TableAttribute>();
-            var tableName = tableAttr != null ? tableAttr.Name : typeof(T).Name.ToLower();
+            var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
+            var tableName = tableAttr != null ? tableAttr.TableName : typeof(T).Name.ToLower();
 
             var sqlCommand = $"SELECT * FROM {tableName}";
 
@@ -39,10 +40,10 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
             return data;
         }
 
-        public async Task<T?> GetByIdAsync(Guid id)
+        public async Task<T?> GetByIdAsync(string id)
         {
-            var tableAttr = typeof(T).GetCustomAttribute<TableAttribute>();
-            var tableName = tableAttr != null ? tableAttr.Name : typeof(T).Name.ToLower();
+            var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
+            var tableName = tableAttr != null ? tableAttr.TableName : typeof(T).Name.ToLower();
 
             var sqlCommand = $"SELECT * FROM {tableName} WHERE {tableName}_id = @Id";
 
@@ -54,20 +55,20 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
         public async Task<T> CreateAsync(T entity)
         {
             var properties = typeof(T).GetProperties();
-            var tableAttr = typeof(T).GetCustomAttribute<TableAttribute>();
-            var tableName = tableAttr != null ? tableAttr.Name : typeof(T).Name.ToLower();
+            var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
+            var tableName = tableAttr != null ? tableAttr.TableName : typeof(T).Name.ToLower();
             var columns = "";
             var columnParams = "";
             var parameters = new DynamicParameters();
             foreach (var prop in properties)
             {
-                var keyAttr = prop.GetCustomAttribute<KeyAttribute>();
+                var keyAttr = prop.GetCustomAttribute<MISAKey>();
                 if (keyAttr != null)
                 {
                     continue;
                 }
-                var columnAttr = prop.GetCustomAttribute<ColumnAttribute>();
-                var columnName = columnAttr != null ? columnAttr.Name : prop.Name.ToLower();
+                var columnAttr = prop.GetCustomAttribute<MISAColumnName>();
+                var columnName = columnAttr != null ? columnAttr.ColumnName : prop.Name.ToLower();
 
                 columns += $"{columnName},";
                 columnParams += $"@{prop.Name},";
@@ -84,21 +85,21 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
             return entity;
         }
 
-        public Task<int> UpdateAsync(Guid id, T entity)
+        public Task<int> UpdateAsync(string id, T entity)
         {
             var properties = typeof(T).GetProperties();
-            var tableAttr = typeof(T).GetCustomAttribute<TableAttribute>();
-            var tableName = tableAttr != null ? tableAttr.Name : typeof(T).Name.ToLower();
+            var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
+            var tableName = tableAttr != null ? tableAttr.TableName : typeof(T).Name.ToLower();
             var setClause = "";
             var parameters = new DynamicParameters();
             foreach (var prop in properties)
             {
-                if (prop.GetCustomAttribute<KeyAttribute>() != null)
+                if (prop.GetCustomAttribute<MISAKey>() != null)
                 {
                     continue;
                 }
-                var columnAttr = prop.GetCustomAttribute<ColumnAttribute>();
-                var columnName = columnAttr != null ? columnAttr.Name : prop.Name;
+                var columnAttr = prop.GetCustomAttribute<MISAColumnName>();
+                var columnName = columnAttr != null ? columnAttr.ColumnName : prop.Name;
                 setClause += $"{columnName} = @{prop.Name},";
                 parameters.Add($"@{prop.Name}", prop.GetValue(entity));
             }
@@ -110,10 +111,10 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
             return result;
         }
 
-        public async Task<int> DeleteAsync(Guid id)
+        public async Task<int> DeleteAsync(string id)
         {
-            var tableAttr = typeof(T).GetCustomAttribute<TableAttribute>();
-            var tableName = tableAttr != null ? tableAttr.Name : typeof(T).Name.ToLower();
+            var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
+            var tableName = tableAttr != null ? tableAttr.TableName : typeof(T).Name.ToLower();
 
             var sqlCommand = $"DELETE FROM {tableName} WHERE {tableName}_id = @Id";
 
@@ -125,6 +126,24 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
         public void Dispose()
         {
             dbConnection?.Dispose();
+        }
+
+        public async Task<bool> CheckDuplicateAsync(string columnName, object value, string? excludeId = null)
+        {
+            var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
+            var tableName = tableAttr != null ? tableAttr.TableName : typeof(T).Name.ToLower();
+
+            var sqlCommand = !string.IsNullOrEmpty(excludeId)
+                ? $"SELECT COUNT(*) FROM {tableName} WHERE {columnName} = @Value AND {tableName}_id != @ExcludeId"
+                : $"SELECT COUNT(*) FROM {tableName} WHERE {columnName} = @Value";
+
+            var count = await dbConnection.ExecuteScalarAsync<int>(sqlCommand, new
+            {
+                Value = value,
+                ExcludeId = excludeId
+            });
+
+            return count > 0;
         }
     }
 }

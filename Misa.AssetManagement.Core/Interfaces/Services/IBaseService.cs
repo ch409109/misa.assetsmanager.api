@@ -9,9 +9,10 @@ namespace Misa.AssetManagement.Core.Interfaces.Services
     public interface IBaseService<T> where T : class
     {
         Task<IEnumerable<T>> GetAllAsync();
-        Task<T?> GetByIdAsync(Guid id);
+        Task<T?> GetByIdAsync(string id);
         Task<T> CreateAsync(T entity);
-        Task<int> UpdateAsync(Guid id, T entity);
-        Task<int> DeleteAsync(Guid id);
+        Task<int> UpdateAsync(string id, T entity);
+        Task<int> DeleteAsync(string id);
+        Task<bool> ValidateEntityAsync(T entity, string? excludeId = null);
     }
 }

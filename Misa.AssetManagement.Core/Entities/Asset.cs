@@ -17,6 +17,7 @@ namespace Misa.AssetManagement.Core.Entities
         public string? AssetId { get; set; }
         [MISARequired("Không được để trống")]
         [MISAColumnName("asset_code")]
+        [MISACheckDuplicate("Mã tài sản không được phép trùng")]
         public string AssetCode { get; set; }
         [MISAColumnName("asset_name")]
         public string AssetName { get; set; }

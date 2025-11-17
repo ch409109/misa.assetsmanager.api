@@ -16,7 +16,7 @@ namespace Misa.AssetManagement.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetById(string id)
         {
             var entity = await baseService.GetByIdAsync(id);
             if (entity == null)
@@ -34,14 +34,14 @@ namespace Misa.AssetManagement.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, T entity)
+        public async Task<IActionResult> Update(string id, T entity)
         {
             var updatedEntity = await baseService.UpdateAsync(id, entity);
             return Ok(updatedEntity);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(string id)
         {
             await baseService.DeleteAsync(id);
             return NoContent();
