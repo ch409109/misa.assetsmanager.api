@@ -28,14 +28,26 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
             dbConnection = new MySqlConnection(connectionString);
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
+        public async Task<IEnumerable<T>> GetAllAsync(string? keyword)
         {
             var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
             var tableName = tableAttr != null ? tableAttr.TableName : typeof(T).Name.ToLower();
 
-            var sqlCommand = $"SELECT * FROM {tableName}";
+            var parameters = new DynamicParameters();
 
-            var data = await dbConnection.QueryAsync<T>(sqlCommand);
+            var whereClauses = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                whereClauses.Add("(asset_code LIKE @Keyword OR asset_name LIKE @Keyword)");
+                parameters.Add("@Keyword", $"%{keyword}%");
+            }
+
+            var whereClause = whereClauses.Count > 0 ? " WHERE " + string.Join(" AND ", whereClauses) : "";
+
+            var sqlCommand = $@"SELECT * FROM {tableName}{whereClause}";
+
+            var data = await dbConnection.QueryAsync<T>(sqlCommand, parameters);
 
             return data;
         }

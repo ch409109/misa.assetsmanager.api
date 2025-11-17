@@ -13,9 +13,9 @@ namespace Misa.AssetManagement.Core.Services
 {
     public class BaseService<T>(IBaseRepository<T> baseRepository) : IBaseService<T> where T : class
     {
-        public Task<IEnumerable<T>> GetAllAsync()
+        public Task<IEnumerable<T>> GetAllAsync(string? keyword)
         {
-            return baseRepository.GetAllAsync();
+            return baseRepository.GetAllAsync(keyword);
         }
 
         public async Task<T> CreateAsync(T entity)

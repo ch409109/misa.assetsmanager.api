@@ -1,4 +1,5 @@
-﻿using Misa.AssetManagement.Core.Entities;
+﻿using Misa.AssetManagement.Core.Dtos;
+using Misa.AssetManagement.Core.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,11 @@ namespace Misa.AssetManagement.Core.Interfaces.Services
 {
     public interface IAssetService : IBaseService<Asset>
     {
+        Task<PagedResult<AssetListDto>> GetAllAssetsWithDetailsAsync(
+            int pageSize,
+            int pageNumber,
+            string? keyword,
+            string? departmentName = null,
+            string? assetTypeName = null);
     }
 }

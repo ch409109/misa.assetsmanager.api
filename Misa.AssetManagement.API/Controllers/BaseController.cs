@@ -9,9 +9,9 @@ namespace Misa.AssetManagement.API.Controllers
     public abstract class BaseController<T>(IBaseService<T> baseService) : ControllerBase where T : class
     {
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] string? keyword = null)
         {
-            var entities = await baseService.GetAllAsync();
+            var entities = await baseService.GetAllAsync(keyword);
             return Ok(entities);
         }
 
