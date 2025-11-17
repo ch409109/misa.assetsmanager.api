@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Misa.AssetManagement.Core.MISAAttributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,37 +9,37 @@ using System.Threading.Tasks;
 
 namespace Misa.AssetManagement.Core.Entities
 {
-    [Table("asset")]
+    [MISATableName("asset")]
     public class Asset
     {
-        [Key]
-        [Column("asset_id")]
-        public string AssetId { get; set; }
-        [Required]
-        [Column("asset_code")]
+        [MISAKey]
+        [MISAColumnName("asset_id")]
+        public string? AssetId { get; set; }
+        [MISARequired("Không được để trống")]
+        [MISAColumnName("asset_code")]
         public string AssetCode { get; set; }
-        [Column("asset_name")]
+        [MISAColumnName("asset_name")]
         public string AssetName { get; set; }
-        [Column("asset_purchase_date")]
+        [MISAColumnName("asset_purchase_date")]
         public DateTime AssetPurchaseDate { get; set; }
-        [Column("asset_usage_year")]
+        [MISAColumnName("asset_usage_year")]
         public int AssetUsageYear { get; set; }
-        [Column("asset_tracking_start_year")]
+        [MISAColumnName("asset_tracking_start_year")]
         public int AssetTrackingStartYear { get; set; }
-        [Required]
-        [Column("asset_quantity")]
+        [MISARequired("Không được để trống")]
+        [MISAColumnName("asset_quantity")]
         public decimal AssetQuantity { get; set; }
-        [Required]
-        [Column("asset_original_cost")]
+        [MISARequired("Không được để trống")]
+        [MISAColumnName("asset_original_cost")]
         public decimal AssetOriginalCost { get; set; }
-        [Required]
-        [Column("asset_annual_depreciation")]
+        [MISARequired("Không được để trống")]
+        [MISAColumnName("asset_annual_depreciation")]
         public decimal AssetAnnualDepreciation { get; set; }
-        [Required]
-        [Column("department_id")]
-        public Guid DepartmentId { get; set; }
-        [Required]
-        [Column("asset_type_id")]
-        public Guid AssetTypeId { get; set; }
+        [MISARequired("Không được để trống")]
+        [MISAColumnName("department_id")]
+        public string DepartmentId { get; set; }
+        [MISARequired("Không được để trống")]
+        [MISAColumnName("asset_type_id")]
+        public string AssetTypeId { get; set; }
     }
 }

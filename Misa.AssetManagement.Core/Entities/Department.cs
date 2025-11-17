@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Misa.AssetManagement.Core.MISAAttributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace Misa.AssetManagement.Core.Entities
 {
-    [Table("department")]
+    [MISATableName("department")]
     public class Department
     {
-        [Key]
-        [Column("department_id")]
+        [MISAKey]
+        [MISAColumnName("department_id")]
         public string DepartmentId { get; set; }
-        [Column("department_name")]
+        [MISAColumnName("department_name")]
         public string DepartmentName { get; set; }
-        [Required]
-        [Column("department_code")]
+        [MISARequired("Không được để trống")]
+        [MISAColumnName("department_code")]
         public string DepartmentCode { get; set; }
     }
 }
