@@ -74,7 +74,18 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
                 INNER JOIN department d ON a.department_id = d.department_id
                 {whereClause}";
 
-            var sql = $"{sqlCommand}; {countSql};";
+            var sumSql = $@"
+                SELECT 
+                    COALESCE(SUM(a.asset_quantity), 0) AS TotalQuantity,
+                    COALESCE(SUM(a.asset_original_cost), 0) AS TotalOriginalCost,
+                    COALESCE(SUM(a.asset_original_cost * at.depreciation_rate / 100), 0) AS TotalAccumulatedDepreciation,
+                    COALESCE(SUM(a.asset_original_cost - (a.asset_original_cost * at.depreciation_rate / 100)), 0) AS TotalRemainingValue
+                FROM asset a
+                INNER JOIN asset_type at ON a.asset_type_id = at.asset_type_id
+                INNER JOIN department d ON a.department_id = d.department_id
+                {whereClause}";
+
+            var sql = $"{sqlCommand}; {countSql}; {sumSql}";
 
             using (var connection = new MySqlConnection(connectionString))
             {
@@ -83,11 +94,16 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
                 {
                     var data = await multi.ReadAsync<AssetListDto>();
                     var totalCount = await multi.ReadSingleAsync<int>();
+                    var totals = await multi.ReadSingleAsync<dynamic>();
 
                     return new PagedResult<AssetListDto>
                     {
                         Data = data,
-                        TotalCount = totalCount
+                        TotalCount = totalCount,
+                        TotalQuantity = totals.TotalQuantity,
+                        TotalOriginalCost = totals.TotalOriginalCost,
+                        TotalAccumulatedDepreciation = totals.TotalAccumulatedDepreciation,
+                        TotalRemainingValue = totals.TotalRemainingValue
                     };
                 }
             }
