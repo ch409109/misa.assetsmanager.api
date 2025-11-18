@@ -51,6 +51,7 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
 
             var sqlCommand = $@"
                 SELECT 
+                    a.asset_id AS AssetId,
                     a.asset_code AS AssetCode,
                     a.asset_name AS AssetName,
                     at.asset_type_name AS AssetTypeName,

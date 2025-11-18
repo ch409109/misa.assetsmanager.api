@@ -8,6 +8,7 @@ namespace Misa.AssetManagement.Core.Dtos
 {
     public class AssetListDto
     {
+        public string AssetId { get; set; }
         public string AssetCode { get; set; }
         public string AssetName { get; set; }
         public string AssetTypeName { get; set; }

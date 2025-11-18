@@ -16,5 +16,7 @@ namespace Misa.AssetManagement.Core.Interfaces.Services
             string? keyword,
             string? departmentName = null,
             string? assetTypeName = null);
+
+        Task<Asset> CreateAssetAsync(AssetCreateDto assetCreateDto);
     }
 }
