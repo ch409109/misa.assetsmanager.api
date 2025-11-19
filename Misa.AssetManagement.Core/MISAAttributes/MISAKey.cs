@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Misa.AssetManagement.Core.MISAAttributes
 {
+    /// <summary>
+    /// Attribute đánh dấu property là khóa chính (Primary Key)
+    /// </summary>
+    /// Created by: CongHT - 19/11/2025
     [AttributeUsage(AttributeTargets.Property)]
     public class MISAKey : Attribute
     {

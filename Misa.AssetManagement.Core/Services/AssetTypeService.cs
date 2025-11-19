@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Misa.AssetManagement.Core.Services
 {
+    /// <summary>
+    /// Service xử lý nghiệp vụ liên quan đến loại tài sản
+    /// </summary>
+    /// Created by: CongHT - 19/11/2025
     public class AssetTypeService(IBaseRepository<AssetType> baseRepository) : BaseService<AssetType>(baseRepository), IAssetTypeService
     {
     }

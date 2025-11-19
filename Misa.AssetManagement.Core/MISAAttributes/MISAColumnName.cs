@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Misa.AssetManagement.Core.MISAAttributes
 {
+    /// <summary>
+    /// Attribute chỉ định tên cột tương ứng trong database
+    /// </summary>
+    /// Created by: CongHT - 19/11/2025
     [AttributeUsage(AttributeTargets.Property)]
     public class MISAColumnName : Attribute
     {

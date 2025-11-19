@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Misa.AssetManagement.Core.Interfaces.Repositories
 {
+    /// <summary>
+    /// Interface định nghĩa các phương thức truy xuất dữ liệu phòng ban
+    /// </summary>
+    /// Created by: CongHT - 19/11/2025
     public interface IDepartmentRepository : IBaseRepository<Department>
     {
     }

@@ -4,10 +4,21 @@ using Misa.AssetManagement.Core.Interfaces.Services;
 
 namespace Misa.AssetManagement.API.Controllers
 {
+    /// <summary>
+    /// Controller cơ sở cung cấp các API CRUD chung
+    /// </summary>
+    /// <typeparam name="T">Kiểu entity</typeparam>
+    /// Created by: CongHT - 19/11/2025
     [Route("api/[controller]")]
     [ApiController]
     public abstract class BaseController<T>(IBaseService<T> baseService) : ControllerBase where T : class
     {
+        /// <summary>
+        /// Lấy tất cả bản ghi với khả năng tìm kiếm
+        /// </summary>
+        /// <param name="keyword">Từ khóa tìm kiếm</param>
+        /// <returns>Danh sách các bản ghi</returns>
+        /// Created by: CongHT - 19/11/2025
         [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] string? keyword = null)
         {
@@ -15,6 +26,12 @@ namespace Misa.AssetManagement.API.Controllers
             return Ok(entities);
         }
 
+        /// <summary>
+        /// Lấy bản ghi theo ID
+        /// </summary>
+        /// <param name="id">ID của bản ghi</param>
+        /// <returns>Thông tin bản ghi</returns>
+        /// Created by: CongHT - 19/11/2025
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
@@ -26,6 +43,12 @@ namespace Misa.AssetManagement.API.Controllers
             return Ok(entity);
         }
 
+        /// <summary>
+        /// Tạo mới một bản ghi
+        /// </summary>
+        /// <param name="entity">Thông tin bản ghi cần tạo</param>
+        /// <returns>Bản ghi đã được tạo</returns>
+        /// Created by: CongHT - 19/11/2025
         [HttpPost]
         public async Task<IActionResult> Create(T entity)
         {
@@ -33,6 +56,13 @@ namespace Misa.AssetManagement.API.Controllers
             return Ok(createdEntity);
         }
 
+        /// <summary>
+        /// Cập nhật thông tin bản ghi
+        /// </summary>
+        /// <param name="id">ID của bản ghi cần cập nhật</param>
+        /// <param name="entity">Thông tin bản ghi mới</param>
+        /// <returns>Kết quả cập nhật</returns>
+        /// Created by: CongHT - 19/11/2025
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, T entity)
         {
@@ -40,6 +70,12 @@ namespace Misa.AssetManagement.API.Controllers
             return Ok(updatedEntity);
         }
 
+        /// <summary>
+        /// Xóa bản ghi theo ID
+        /// </summary>
+        /// <param name="id">ID của bản ghi cần xóa</param>
+        /// <returns>Kết quả xóa</returns>
+        /// Created by: CongHT - 19/11/2025
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(string id)
         {

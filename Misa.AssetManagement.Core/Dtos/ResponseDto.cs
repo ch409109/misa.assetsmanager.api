@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace Misa.AssetManagement.Core.Dtos
 {
+    /// <summary>
+    /// DTO chuẩn cho response API
+    /// </summary>
+    /// <typeparam name="T">Kiểu dữ liệu trả về</typeparam>
+    /// Created by: CongHT - 19/11/2025
     public class ResponseDto<T>
     {
         public bool Success { get; set; }
@@ -32,9 +37,7 @@ namespace Misa.AssetManagement.Core.Dtos
         /// <param name="data">Dữ liệu trả về</param>
         /// <param name="userMessage">Thông báo cho người dùng</param>
         /// <returns>ResponseDto với Success = true, Code = 200</returns>
-        /// ServerTime   --> Thời gian máy chủ xử lý và trả về response
-        /// GetLastData  --> Xác định request có thành công (true) hay thất bại (false)
-        /// Created by: khangNS - 02/11/2025
+        /// Created by: CongHT - 19/11/2025
         public static ResponseDto<T> SuccessResponse(T data, string? userMessage = null)
         {
             return new ResponseDto<T>
@@ -59,7 +62,7 @@ namespace Misa.AssetManagement.Core.Dtos
         /// <param name="systemMessage">Thông báo hệ thống (cho developer)</param>
         /// <param name="validateInfo">Danh sách lỗi validation chi tiết</param>
         /// <returns>ResponseDto với Success = false</returns>
-        /// Created by: khangNS - 02/11/2025
+        /// Created by: CongHT - 19/11/2025
         public static ResponseDto<T> ErrorResponse(
             int code,
             string userMessage,

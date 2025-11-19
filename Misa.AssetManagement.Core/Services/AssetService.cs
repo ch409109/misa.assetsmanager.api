@@ -13,10 +13,20 @@ using System.Threading.Tasks;
 
 namespace Misa.AssetManagement.Core.Services
 {
+    /// <summary>
+    /// Service xử lý nghiệp vụ liên quan đến tài sản
+    /// </summary>
+    /// Created by: CongHT - 19/11/2025
     public class AssetService(IAssetRepository assetRepository) : BaseService<Asset>(assetRepository), IAssetService
     {
         private readonly IAssetRepository _assetRepository = assetRepository;
 
+        /// <summary>
+        /// Tạo mới tài sản từ DTO
+        /// </summary>
+        /// <param name="assetCreateDto">DTO chứa thông tin tài sản cần tạo</param>
+        /// <returns>Tài sản đã được tạo</returns>
+        /// Created by: CongHT - 19/11/2025
         public async Task<Asset> CreateAssetAsync(AssetCreateDto assetCreateDto)
         {
             await ValidateAssetCreateDtoAsync(assetCreateDto);
@@ -26,6 +36,16 @@ namespace Misa.AssetManagement.Core.Services
             return await _assetRepository.CreateAsync(asset);
         }
 
+        /// <summary>
+        /// Lấy danh sách tài sản với thông tin chi tiết có phân trang và lọc
+        /// </summary>
+        /// <param name="pageSize">Số bản ghi trên mỗi trang</param>
+        /// <param name="pageNumber">Số thứ tự trang</param>
+        /// <param name="keyword">Từ khóa tìm kiếm (có thể null)</param>
+        /// <param name="departmentName">Tên phòng ban để lọc (có thể null)</param>
+        /// <param name="assetTypeName">Tên loại tài sản để lọc (có thể null)</param>
+        /// <returns>Kết quả phân trang chứa danh sách tài sản và thông tin tổng hợp</returns>
+        /// Created by: CongHT - 19/11/2025
         public Task<PagedResult<AssetListDto>> GetAllAssetsWithDetailsAsync(
             int pageSize,
             int pageNumber,
@@ -46,6 +66,15 @@ namespace Misa.AssetManagement.Core.Services
             return _assetRepository.GetAllAssetsWithDetailsAsync(pageSize, pageNumber, keyword, departmentName, assetTypeName);
         }
 
+        /// <summary>
+        /// Validate thông tin tài sản từ DTO
+        /// </summary>
+        /// <param name="dto">DTO chứa thông tin tài sản cần validate</param>
+        /// <param name="excludeId">ID cần loại trừ khi kiểm tra trùng lặp (dùng khi update)</param>
+        /// <returns>True nếu hợp lệ</returns>
+        /// <exception cref="ValidationException">Khi dữ liệu không hợp lệ</exception>
+        /// <exception cref="DuplicateException">Khi có dữ liệu trùng lặp</exception>
+        /// Created by: CongHT - 19/11/2025
         public async Task<bool> ValidateAssetCreateDtoAsync(AssetCreateDto dto, string? excludeId = null)
         {
             var properties = typeof(AssetCreateDto).GetProperties();
@@ -85,6 +114,12 @@ namespace Misa.AssetManagement.Core.Services
             return true;
         }
 
+        /// <summary>
+        /// Chuyển đổi từ AssetCreateDto sang Asset entity
+        /// </summary>
+        /// <param name="dto">DTO chứa thông tin tài sản</param>
+        /// <returns>Asset entity</returns>
+        /// Created by: CongHT - 19/11/2025
         private static Asset MapToAsset(AssetCreateDto dto)
         {
             var asset = new Asset

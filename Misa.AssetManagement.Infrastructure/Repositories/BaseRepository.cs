@@ -22,12 +22,23 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
         protected readonly string connectionString;
         protected IDbConnection dbConnection;
 
+        /// <summary>
+        /// Khởi tạo repository với cấu hình kết nối database
+        /// </summary>
+        /// <param name="configuration">Cấu hình ứng dụng</param>
+        /// Created by: CongHT - 19/11/2025
         public BaseRepository(IConfiguration configuration)
         {
             connectionString = configuration.GetConnectionString("DefaultConnection");
             dbConnection = new MySqlConnection(connectionString);
         }
 
+        /// <summary>
+        /// Lấy tất cả bản ghi với khả năng tìm kiếm theo từ khóa
+        /// </summary>
+        /// <param name="keyword">Từ khóa tìm kiếm (có thể null)</param>
+        /// <returns>Danh sách các bản ghi</returns>
+        /// Created by: CongHT - 19/11/2025
         public async Task<IEnumerable<T>> GetAllAsync(string? keyword)
         {
             var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
@@ -52,6 +63,12 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
             return data;
         }
 
+        /// <summary>
+        /// Lấy bản ghi theo ID
+        /// </summary>
+        /// <param name="id">ID của bản ghi</param>
+        /// <returns>Bản ghi tìm được hoặc null nếu không tồn tại</returns>
+        /// Created by: CongHT - 19/11/2025
         public async Task<T?> GetByIdAsync(string id)
         {
             var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
@@ -64,6 +81,12 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
             return result;
         }
 
+        /// <summary>
+        /// Tạo mới một bản ghi
+        /// </summary>
+        /// <param name="entity">Đối tượng cần tạo</param>
+        /// <returns>Đối tượng đã được tạo</returns>
+        /// Created by: CongHT - 19/11/2025
         public async Task<T> CreateAsync(T entity)
         {
             var properties = typeof(T).GetProperties();
@@ -97,6 +120,13 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
             return entity;
         }
 
+        /// <summary>
+        /// Cập nhật thông tin bản ghi
+        /// </summary>
+        /// <param name="id">ID của bản ghi cần cập nhật</param>
+        /// <param name="entity">Đối tượng chứa thông tin mới</param>
+        /// <returns>Số bản ghi bị ảnh hưởng</returns>
+        /// Created by: CongHT - 19/11/2025
         public Task<int> UpdateAsync(string id, T entity)
         {
             var properties = typeof(T).GetProperties();
@@ -123,6 +153,12 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
             return result;
         }
 
+        /// <summary>
+        /// Xóa bản ghi theo ID
+        /// </summary>
+        /// <param name="id">ID của bản ghi cần xóa</param>
+        /// <returns>Số bản ghi bị xóa</returns>
+        /// Created by: CongHT - 19/11/2025
         public async Task<int> DeleteAsync(string id)
         {
             var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
@@ -135,11 +171,23 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
             return result;
         }
 
+        /// <summary>
+        /// Giải phóng tài nguyên kết nối database
+        /// </summary>
+        /// Created by: CongHT - 19/11/2025
         public void Dispose()
         {
             dbConnection?.Dispose();
         }
 
+        /// <summary>
+        /// Kiểm tra trùng lặp giá trị của cột
+        /// </summary>
+        /// <param name="columnName">Tên cột cần kiểm tra</param>
+        /// <param name="value">Giá trị cần kiểm tra</param>
+        /// <param name="excludeId">ID cần loại trừ khi kiểm tra (dùng khi update)</param>
+        /// <returns>True nếu giá trị đã tồn tại, False nếu chưa tồn tại</returns>
+        /// Created by: CongHT - 19/11/2025
         public async Task<bool> CheckDuplicateAsync(string columnName, object value, string? excludeId = null)
         {
             var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
