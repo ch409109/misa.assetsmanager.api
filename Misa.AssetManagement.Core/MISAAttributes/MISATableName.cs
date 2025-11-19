@@ -9,7 +9,7 @@ namespace Misa.AssetManagement.Core.MISAAttributes
     /// <summary>
     /// Attribute chỉ định tên bảng tương ứng trong database
     /// </summary>
-    /// Created by: CongHT - 19/11/2025
+    /// Created by: CongHT - 17/11/2025
     [AttributeUsage(AttributeTargets.Class)]
     public class MISATableName : Attribute
     {

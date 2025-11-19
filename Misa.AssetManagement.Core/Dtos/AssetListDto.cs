@@ -9,7 +9,7 @@ namespace Misa.AssetManagement.Core.Dtos
     /// <summary>
     /// DTO chứa thông tin tài sản hiển thị trong danh sách
     /// </summary>
-    /// Created by: CongHT - 19/11/2025
+    /// Created by: CongHT - 18/11/2025
     public class AssetListDto
     {
         public string AssetId { get; set; }

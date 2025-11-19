@@ -26,7 +26,7 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
         /// Khởi tạo repository với cấu hình kết nối database
         /// </summary>
         /// <param name="configuration">Cấu hình ứng dụng</param>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         public BaseRepository(IConfiguration configuration)
         {
             connectionString = configuration.GetConnectionString("DefaultConnection");
@@ -38,7 +38,7 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
         /// </summary>
         /// <param name="keyword">Từ khóa tìm kiếm (có thể null)</param>
         /// <returns>Danh sách các bản ghi</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         public async Task<IEnumerable<T>> GetAllAsync(string? keyword)
         {
             var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
@@ -68,7 +68,7 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
         /// </summary>
         /// <param name="id">ID của bản ghi</param>
         /// <returns>Bản ghi tìm được hoặc null nếu không tồn tại</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         public async Task<T?> GetByIdAsync(string id)
         {
             var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
@@ -86,7 +86,7 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
         /// </summary>
         /// <param name="entity">Đối tượng cần tạo</param>
         /// <returns>Đối tượng đã được tạo</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         public async Task<T> CreateAsync(T entity)
         {
             var properties = typeof(T).GetProperties();
@@ -126,7 +126,7 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
         /// <param name="id">ID của bản ghi cần cập nhật</param>
         /// <param name="entity">Đối tượng chứa thông tin mới</param>
         /// <returns>Số bản ghi bị ảnh hưởng</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         public Task<int> UpdateAsync(string id, T entity)
         {
             var properties = typeof(T).GetProperties();
@@ -158,7 +158,7 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
         /// </summary>
         /// <param name="id">ID của bản ghi cần xóa</param>
         /// <returns>Số bản ghi bị xóa</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         public async Task<int> DeleteAsync(string id)
         {
             var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
@@ -174,7 +174,7 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
         /// <summary>
         /// Giải phóng tài nguyên kết nối database
         /// </summary>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         public void Dispose()
         {
             dbConnection?.Dispose();
@@ -187,7 +187,7 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
         /// <param name="value">Giá trị cần kiểm tra</param>
         /// <param name="excludeId">ID cần loại trừ khi kiểm tra (dùng khi update)</param>
         /// <returns>True nếu giá trị đã tồn tại, False nếu chưa tồn tại</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         public async Task<bool> CheckDuplicateAsync(string columnName, object value, string? excludeId = null)
         {
             var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();

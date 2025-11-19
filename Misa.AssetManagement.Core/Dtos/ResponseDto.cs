@@ -10,7 +10,7 @@ namespace Misa.AssetManagement.Core.Dtos
     /// DTO chuẩn cho response API
     /// </summary>
     /// <typeparam name="T">Kiểu dữ liệu trả về</typeparam>
-    /// Created by: CongHT - 19/11/2025
+    /// Created by: CongHT - 17/11/2025
     public class ResponseDto<T>
     {
         public bool Success { get; set; }

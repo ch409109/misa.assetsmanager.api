@@ -9,7 +9,7 @@ namespace Misa.AssetManagement.Core.Exceptions
     /// <summary>
     /// Exception được throw khi phát hiện dữ liệu trùng lặp
     /// </summary>
-    /// Created by: CongHT - 19/11/2025
+    /// Created by: CongHT - 17/11/2025
     public class DuplicateException : Exception
     {
         public string? DuplicateField { get; set; }
@@ -20,7 +20,7 @@ namespace Misa.AssetManagement.Core.Exceptions
         /// Khởi tạo exception với thông báo lỗi
         /// </summary>
         /// <param name="message">Thông báo lỗi</param>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 17/112025
         public DuplicateException(string message) : base(message)
         {
         }
@@ -31,7 +31,7 @@ namespace Misa.AssetManagement.Core.Exceptions
         /// <param name="message">Thông báo lỗi</param>
         /// <param name="duplicateField">Tên trường bị trùng lặp</param>
         /// <param name="existingName">Giá trị đã tồn tại</param>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 17/112025
         public DuplicateException(string message, string duplicateField, string existingName) : base(message)
         {
             DuplicateField = duplicateField;

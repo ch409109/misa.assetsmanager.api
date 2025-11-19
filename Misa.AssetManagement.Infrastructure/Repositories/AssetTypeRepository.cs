@@ -12,7 +12,7 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
     /// <summary>
     /// Repository xử lý nghiệp vụ liên quan đến loại tài sản
     /// </summary>
-    /// Created by: CongHT - 19/11/2025
+    /// Created by: CongHT - 16/11/2025
     public class AssetTypeRepository(IConfiguration configuration) : BaseRepository<AssetType>(configuration), IAssetTypeRepository
     {
     }

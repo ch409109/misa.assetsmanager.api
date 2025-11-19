@@ -23,7 +23,7 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
         /// <param name="departmentName">Tên phòng ban để lọc (có thể null)</param>
         /// <param name="assetTypeName">Tên loại tài sản để lọc (có thể null)</param>
         /// <returns>Kết quả phân trang chứa danh sách tài sản và thông tin tổng hợp</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         public async Task<PagedResult<AssetListDto>> GetAllAssetsWithDetailsAsync(
             int pageSize,
             int pageNumber,

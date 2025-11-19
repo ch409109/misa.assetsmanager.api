@@ -11,7 +11,7 @@ namespace Misa.AssetManagement.Core.Interfaces.Repositories
     /// <summary>
     /// Interface định nghĩa các phương thức truy xuất dữ liệu tài sản
     /// </summary>
-    /// Created by: CongHT - 19/11/2025
+    /// Created by: CongHT - 16/11/2025
     public interface IAssetRepository : IBaseRepository<Asset>
     {
         /// <summary>
@@ -23,7 +23,7 @@ namespace Misa.AssetManagement.Core.Interfaces.Repositories
         /// <param name="departmentName">Tên phòng ban để lọc (có thể null)</param>
         /// <param name="assetTypeName">Tên loại tài sản để lọc (có thể null)</param>
         /// <returns>Kết quả phân trang chứa danh sách tài sản và thông tin tổng hợp</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         Task<PagedResult<AssetListDto>> GetAllAssetsWithDetailsAsync(
             int pageSize,
             int pageNumber,

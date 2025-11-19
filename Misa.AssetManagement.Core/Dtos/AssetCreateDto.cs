@@ -10,7 +10,7 @@ namespace Misa.AssetManagement.Core.Dtos
     /// <summary>
     /// DTO chứa thông tin để tạo mới tài sản
     /// </summary>
-    /// Created by: CongHT - 19/11/2025
+    /// Created by: CongHT - 16/11/2025
     public class AssetCreateDto
     {
         [MISARequired("Không được để trống")]

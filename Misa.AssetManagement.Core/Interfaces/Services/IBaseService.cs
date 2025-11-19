@@ -10,7 +10,7 @@ namespace Misa.AssetManagement.Core.Interfaces.Services
     /// Interface cơ sở định nghĩa các phương thức CRUD chung
     /// </summary>
     /// <typeparam name="T">Kiểu entity</typeparam>
-    /// Created by: CongHT - 19/11/2025
+    /// Created by: CongHT - 16/11/2025
     public interface IBaseService<T> where T : class
     {
         /// <summary>
@@ -18,7 +18,7 @@ namespace Misa.AssetManagement.Core.Interfaces.Services
         /// </summary>
         /// <param name="keyword">Từ khóa tìm kiếm (có thể null)</param>
         /// <returns>Danh sách các bản ghi</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         Task<IEnumerable<T>> GetAllAsync(string? keyword);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Misa.AssetManagement.Core.Interfaces.Services
         /// </summary>
         /// <param name="id">ID của bản ghi</param>
         /// <returns>Bản ghi tìm được hoặc null nếu không tồn tại</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         Task<T?> GetByIdAsync(string id);
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Misa.AssetManagement.Core.Interfaces.Services
         /// </summary>
         /// <param name="entity">Đối tượng cần tạo</param>
         /// <returns>Đối tượng đã được tạo</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         Task<T> CreateAsync(T entity);
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Misa.AssetManagement.Core.Interfaces.Services
         /// <param name="id">ID của bản ghi cần cập nhật</param>
         /// <param name="entity">Đối tượng chứa thông tin mới</param>
         /// <returns>Số bản ghi bị ảnh hưởng</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         Task<int> UpdateAsync(string id, T entity);
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Misa.AssetManagement.Core.Interfaces.Services
         /// </summary>
         /// <param name="id">ID của bản ghi cần xóa</param>
         /// <returns>Số bản ghi bị xóa</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         Task<int> DeleteAsync(string id);
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Misa.AssetManagement.Core.Interfaces.Services
         /// <param name="entity">Đối tượng cần validate</param>
         /// <param name="excludeId">ID cần loại trừ khi kiểm tra trùng lặp (dùng khi update)</param>
         /// <returns>True nếu hợp lệ</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         Task<bool> ValidateEntityAsync(T entity, string? excludeId = null);
     }
 }

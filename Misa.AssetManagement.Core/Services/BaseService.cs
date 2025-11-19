@@ -15,7 +15,7 @@ namespace Misa.AssetManagement.Core.Services
     /// Service cơ sở cung cấp các chức năng CRUD chung
     /// </summary>
     /// <typeparam name="T">Kiểu entity</typeparam>
-    /// Created by: CongHT - 19/11/2025
+    /// Created by: CongHT - 16/11/2025
     public class BaseService<T>(IBaseRepository<T> baseRepository) : IBaseService<T> where T : class
     {
         /// <summary>
@@ -23,7 +23,7 @@ namespace Misa.AssetManagement.Core.Services
         /// </summary>
         /// <param name="keyword">Từ khóa tìm kiếm (có thể null)</param>
         /// <returns>Danh sách các bản ghi</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         public Task<IEnumerable<T>> GetAllAsync(string? keyword)
         {
             return baseRepository.GetAllAsync(keyword);
@@ -34,7 +34,7 @@ namespace Misa.AssetManagement.Core.Services
         /// </summary>
         /// <param name="entity">Đối tượng cần tạo</param>
         /// <returns>Đối tượng đã được tạo</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         public async Task<T> CreateAsync(T entity)
         {
             await ValidateEntityAsync(entity);
@@ -46,7 +46,7 @@ namespace Misa.AssetManagement.Core.Services
         /// </summary>
         /// <param name="id">ID của bản ghi cần xóa</param>
         /// <returns>Số bản ghi bị xóa</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         public Task<int> DeleteAsync(string id)
         {
             return baseRepository.DeleteAsync(id);
@@ -57,7 +57,7 @@ namespace Misa.AssetManagement.Core.Services
         /// </summary>
         /// <param name="id">ID của bản ghi</param>
         /// <returns>Bản ghi tìm được hoặc null nếu không tồn tại</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         public Task<T?> GetByIdAsync(string id)
         {
             return baseRepository.GetByIdAsync(id);
@@ -69,7 +69,7 @@ namespace Misa.AssetManagement.Core.Services
         /// <param name="id">ID của bản ghi cần cập nhật</param>
         /// <param name="entity">Đối tượng chứa thông tin mới</param>
         /// <returns>Số bản ghi bị ảnh hưởng</returns>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         public async Task<int> UpdateAsync(string id, T entity)
         {
             await ValidateEntityAsync(entity, id);
@@ -84,7 +84,7 @@ namespace Misa.AssetManagement.Core.Services
         /// <returns>True nếu hợp lệ</returns>
         /// <exception cref="ValidationException">Khi dữ liệu không hợp lệ</exception>
         /// <exception cref="DuplicateException">Khi có dữ liệu trùng lặp</exception>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 16/11/2025
         public async Task<bool> ValidateEntityAsync(T entity, string? excludeId = null)
         {
             var properties = typeof(T).GetProperties();

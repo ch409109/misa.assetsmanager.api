@@ -12,7 +12,7 @@ namespace Misa.AssetManagement.Core.Exceptions
     /// <summary>
     /// Middleware xử lý các exception và chuyển đổi thành response chuẩn
     /// </summary>
-    /// Created by: CongHT - 19/11/2025
+    /// Created by: CongHT - 17/11/2025
     public class ValidateExceptionMiddleware
     {
         private readonly RequestDelegate _next;
@@ -21,7 +21,7 @@ namespace Misa.AssetManagement.Core.Exceptions
         /// Khởi tạo middleware
         /// </summary>
         /// <param name="next">Request delegate tiếp theo trong pipeline</param>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 17/11/2025
         public ValidateExceptionMiddleware(RequestDelegate next)
         {
             _next = next;
@@ -31,7 +31,7 @@ namespace Misa.AssetManagement.Core.Exceptions
         /// Xử lý request và bắt các exception
         /// </summary>
         /// <param name="context">HTTP context</param>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 17/11/2025
         public async Task InvokeAsync(HttpContext context)
         {
             try
@@ -68,7 +68,7 @@ namespace Misa.AssetManagement.Core.Exceptions
         /// <param name="userMessage">Thông báo lỗi cho người dùng</param>
         /// <param name="systemMessage">Thông báo lỗi hệ thống</param>
         /// <param name="validateInfo">Danh sách thông tin validate chi tiết</param>
-        /// Created by: CongHT - 19/11/2025
+        /// Created by: CongHT - 17/11/2025
         private async Task HandleExceptionAsync(
             HttpContext context,
             int statusCode,

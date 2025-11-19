@@ -9,7 +9,7 @@ namespace Misa.AssetManagement.Core.MISAAttributes
     /// <summary>
     /// Attribute đánh dấu property là bắt buộc (không được để trống)
     /// </summary>
-    /// Created by: CongHT - 19/11/2025
+    /// Created by: CongHT - 17/11/2025
     [AttributeUsage(AttributeTargets.Property)]
     public class MISARequired : Attribute
     {
