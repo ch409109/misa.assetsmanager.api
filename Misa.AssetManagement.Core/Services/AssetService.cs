@@ -131,7 +131,7 @@ namespace Misa.AssetManagement.Core.Services
                 AssetPurchaseDate = dto.AssetPurchaseDate,
                 AssetOriginalCost = dto.AssetOriginalCost,
                 AssetQuantity = dto.AssetQuantity,
-                AssetUsageYear = dto.AssetUsageYear,
+                AssetUsageStartDate = dto.AssetUsageStartDate,
                 AssetTrackingStartYear = dto.AssetTrackingStartYear,
                 AssetAnnualDepreciation = dto.AssetAnnualDepreciation
             };

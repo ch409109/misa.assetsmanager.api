@@ -48,17 +48,21 @@ namespace Misa.AssetManagement.API.Controllers
         /// Lấy thông tin tài sản theo ID
         /// </summary>
         /// <param name="id">ID của tài sản</param>
-        /// <returns>Thông tin tài sản</returns>
+        /// <returns>Thông tin tài sản. Luôn trả về 200 OK với trường Success để phân biệt kết quả</returns>
         /// Created by: CongHT - 16/112025
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(string id)
         {
             var entity = await assetService.GetByIdAsync(id);
-            if (entity == null)
+            var response = new ResponseDto<Asset>
             {
-                return NotFound();
-            }
-            return Ok(entity);
+                Success = entity != null,
+                Data = entity,
+                UserMessage = entity != null
+                ? "Lấy thông tin tài sản thành công"
+                : "Không tìm thấy tài sản"
+            };
+            return Ok(response);
         }
 
         /// <summary>
@@ -67,7 +71,7 @@ namespace Misa.AssetManagement.API.Controllers
         /// <param name="assetCreateDto">Thông tin tài sản cần tạo</param>
         /// <returns>Tài sản đã được tạo</returns>
         /// Created by: CongHT - 16/112025
-        [HttpPost]
+        [HttpPost("new")]
         public async Task<IActionResult> Create([FromBody] AssetCreateDto assetCreateDto)
         {
             var createdAsset = await assetService.CreateAssetAsync(assetCreateDto);

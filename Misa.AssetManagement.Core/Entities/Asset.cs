@@ -23,8 +23,8 @@ namespace Misa.AssetManagement.Core.Entities
         public string AssetName { get; set; }
         [MISAColumnName("asset_purchase_date")]
         public DateTime AssetPurchaseDate { get; set; }
-        [MISAColumnName("asset_usage_year")]
-        public int AssetUsageYear { get; set; }
+        [MISAColumnName("asset_usage_start_date")]
+        public DateTime AssetUsageStartDate { get; set; }
         [MISAColumnName("asset_tracking_start_year")]
         public int AssetTrackingStartYear { get; set; }
         [MISARequired("Không được để trống")]
