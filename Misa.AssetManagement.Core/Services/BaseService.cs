@@ -123,5 +123,21 @@ namespace Misa.AssetManagement.Core.Services
             }
             return true;
         }
+
+        /// <summary>
+        /// Xóa nhiều bản ghi theo danh sách ID
+        /// </summary>
+        /// <param name="ids">Danh sách ID cần xóa</param>
+        /// <returns>Số bản ghi bị xóa</returns>
+        /// Created by: CongHT - 21/11/2025
+        public async Task<int> DeleteMultipleAsync(List<string> ids)
+        {
+            if (ids == null || ids.Count == 0)
+            {
+                throw new ValidationException("Danh sách ID không được để trống");
+            }
+
+            return await baseRepository.DeleteMultipleAsync(ids);
+        }
     }
 }

@@ -124,5 +124,22 @@ namespace Misa.AssetManagement.API.Controllers
             );
             return Ok(response);
         }
+
+        /// <summary>
+        /// Xóa nhiều tài sản theo danh sách ID
+        /// </summary>
+        /// <param name="ids">Danh sách ID của tài sản cần xóa</param>
+        /// <returns>Số bản ghi đã xóa</returns>
+        /// Created by: CongHT - 21/11/2025
+        [HttpDelete("delete-multiple")]
+        public async Task<IActionResult> DeleteMultiple([FromBody] List<string> ids)
+        {
+            var deletedCount = await assetService.DeleteMultipleAsync(ids);
+            var response = ResponseDto<int>.SuccessResponse(
+                data: deletedCount,
+                userMessage: $"Đã xóa {deletedCount} tài sản thành công"
+            );
+            return Ok(response);
+        }
     }
 }

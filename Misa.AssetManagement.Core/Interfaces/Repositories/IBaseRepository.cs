@@ -63,5 +63,13 @@ namespace Misa.AssetManagement.Core.Interfaces.Repositories
         /// <returns>True nếu giá trị đã tồn tại, False nếu chưa tồn tại</returns>
         /// Created by: CongHT - 16/11/2025
         Task<bool> CheckDuplicateAsync(string columnName, object value, string? excludeId = null);
+
+        /// <summary>
+        /// Xóa nhiều bản ghi theo danh sách ID
+        /// </summary>
+        /// <param name="ids">Danh sách ID cần xóa</param>
+        /// <returns>Số bản ghi bị xóa</returns>
+        /// Created by: CongHT - 21/11/2025
+        Task<int> DeleteMultipleAsync(List<string> ids);
     }
 }

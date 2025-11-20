@@ -62,5 +62,13 @@ namespace Misa.AssetManagement.Core.Interfaces.Services
         /// <returns>True nếu hợp lệ</returns>
         /// Created by: CongHT - 16/11/2025
         Task<bool> ValidateEntityAsync(T entity, string? excludeId = null);
+
+        /// <summary>
+        /// Xóa nhiều bản ghi theo danh sách ID
+        /// </summary>
+        /// <param name="ids">Danh sách ID cần xóa</param>
+        /// <returns>Số bản ghi bị xóa</returns>
+        /// Created by: CongHT - 21/11/2025
+        Task<int> DeleteMultipleAsync(List<string> ids);
     }
 }

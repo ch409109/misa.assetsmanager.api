@@ -205,5 +205,38 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
 
             return count > 0;
         }
+
+        /// <summary>
+        /// Xóa nhiều bản ghi theo danh sách ID
+        /// </summary>
+        /// <param name="ids">Danh sách ID cần xóa</param>
+        /// <returns>Số bản ghi bị xóa</returns>
+        /// Created by: CongHT - 21/11/2025
+        public async Task<int> DeleteMultipleAsync(List<string> ids)
+        {
+            if (ids == null || ids.Count == 0)
+            {
+                return 0;
+            }
+
+            var tableAttr = typeof(T).GetCustomAttribute<MISATableName>();
+            var tableName = tableAttr != null ? tableAttr.TableName : typeof(T).Name.ToLower();
+
+            var parameters = new DynamicParameters();
+            var paramNames = new List<string>();
+
+            for (int i = 0; i < ids.Count; i++)
+            {
+                var paramName = $"@Id{i}";
+                paramNames.Add(paramName);
+                parameters.Add(paramName, ids[i]);
+            }
+
+            var sqlCommand = $"DELETE FROM {tableName} WHERE {tableName}_id IN ({string.Join(",", paramNames)})";
+
+            var result = await dbConnection.ExecuteAsync(sqlCommand, parameters);
+
+            return result;
+        }
     }
 }

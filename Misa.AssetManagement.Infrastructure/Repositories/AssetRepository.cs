@@ -41,7 +41,7 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
 
             if (!string.IsNullOrWhiteSpace(keyword))
             {
-                whereClauses.Add("(a.asset_code LIKE @Keyword OR a.asset_name LIKE @Keyword OR c.category_name LIKE @Keyword)");
+                whereClauses.Add("(a.asset_code LIKE @Keyword OR a.asset_name LIKE @Keyword)");
                 parameters.Add("@Keyword", $"%{keyword}%");
             }
 
