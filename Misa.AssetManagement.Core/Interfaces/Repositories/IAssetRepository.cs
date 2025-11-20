@@ -30,5 +30,12 @@ namespace Misa.AssetManagement.Core.Interfaces.Repositories
             string? keyword,
             string? departmentName = null,
             string? assetTypeName = null);
+
+        /// <summary>
+        /// Lấy mã tài sản lớn nhất hiện có
+        /// </summary>
+        /// <returns>Mã tài sản lớn nhất</returns>
+        /// Created by: CongHT - 20/11/2025
+        Task<string?> GetMaxAssetCodeAsync();
     }
 }

@@ -12,7 +12,7 @@ namespace Misa.AssetManagement.Core.Dtos
     /// Created by: CongHT - 18/11/2025
     public class AssetListDto
     {
-        public string AssetId { get; set; }
+        public Guid AssetId { get; set; }
 
         public string AssetCode { get; set; }
 

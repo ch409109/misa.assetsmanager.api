@@ -137,5 +137,34 @@ namespace Misa.AssetManagement.Core.Services
             };
             return asset;
         }
+
+        /// <summary>
+        /// Sinh mã tài sản mới tự động
+        /// </summary>
+        /// <returns>Mã tài sản mới</returns>
+        /// Created by: CongHT - 20/11/2025
+        public async Task<string> GenerateNewAssetCodeAsync()
+        {
+            var maxCode = await _assetRepository.GetMaxAssetCodeAsync();
+
+            if (string.IsNullOrEmpty(maxCode))
+            {
+                return "TS00001";
+            }
+
+            var prefix = new string(maxCode.TakeWhile(c => !char.IsDigit(c)).ToArray());
+            var numberPart = new string(maxCode.SkipWhile(c => !char.IsDigit(c)).ToArray());
+
+            if (string.IsNullOrEmpty(numberPart))
+            {
+                return maxCode + "1";
+            }
+
+            var nextNumber = int.Parse(numberPart) + 1;
+
+            var newCode = $"{prefix}{nextNumber.ToString().PadLeft(numberPart.Length, '0')}";
+
+            return newCode;
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace Misa.AssetManagement.Core.Entities
     {
         [MISAKey]
         [MISAColumnName("asset_type_id")]
-        public string AssetTypeId { get; set; }
+        public Guid AssetTypeId { get; set; }
         [MISARequired("Không được để trống")]
         [MISAColumnName("asset_type_code")]
         public string AssetTypeCode { get; set; }

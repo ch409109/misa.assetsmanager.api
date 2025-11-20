@@ -38,5 +38,12 @@ namespace Misa.AssetManagement.Core.Interfaces.Services
         /// <returns>Tài sản đã được tạo</returns>
         /// Created by: CongHT - 16/11/2025
         Task<Asset> CreateAssetAsync(AssetCreateDto assetCreateDto);
+
+        /// <summary>
+        /// Sinh mã tài sản mới tự động
+        /// </summary>
+        /// <returns>Mã tài sản mới</returns>
+        /// Created by: CongHT - 20/11/2025
+        Task<string> GenerateNewAssetCodeAsync();
     }
 }

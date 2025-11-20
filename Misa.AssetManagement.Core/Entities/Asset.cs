@@ -14,7 +14,7 @@ namespace Misa.AssetManagement.Core.Entities
     {
         [MISAKey]
         [MISAColumnName("asset_id")]
-        public string? AssetId { get; set; }
+        public Guid? AssetId { get; set; }
         [MISARequired("Không được để trống")]
         [MISAColumnName("asset_code")]
         [MISACheckDuplicate("Mã tài sản không được phép trùng")]
@@ -38,9 +38,9 @@ namespace Misa.AssetManagement.Core.Entities
         public decimal AssetAnnualDepreciation { get; set; }
         [MISARequired("Không được để trống")]
         [MISAColumnName("department_id")]
-        public string DepartmentId { get; set; }
+        public Guid DepartmentId { get; set; }
         [MISARequired("Không được để trống")]
         [MISAColumnName("asset_type_id")]
-        public string AssetTypeId { get; set; }
+        public Guid AssetTypeId { get; set; }
     }
 }

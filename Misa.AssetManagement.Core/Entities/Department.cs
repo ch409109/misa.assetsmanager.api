@@ -14,7 +14,7 @@ namespace Misa.AssetManagement.Core.Entities
     {
         [MISAKey]
         [MISAColumnName("department_id")]
-        public string DepartmentId { get; set; }
+        public Guid DepartmentId { get; set; }
         [MISAColumnName("department_name")]
         public string DepartmentName { get; set; }
         [MISARequired("Không được để trống")]

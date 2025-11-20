@@ -74,7 +74,7 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
                 INNER JOIN asset_type at ON a.asset_type_id = at.asset_type_id
                 INNER JOIN department d ON a.department_id = d.department_id
                 {whereClause}
-                ORDER BY a.asset_code
+                ORDER BY a.asset_code DESC
                 LIMIT @PageSize OFFSET @Offset";
 
             var countSql = $@"
@@ -116,6 +116,18 @@ namespace Misa.AssetManagement.Infrastructure.Repositories
                         TotalRemainingValue = totals.TotalRemainingValue
                     };
                 }
+            }
+        }
+
+        public async Task<string?> GetMaxAssetCodeAsync()
+        {
+            var sqlCommand = "SELECT asset_code FROM asset ORDER BY asset_code DESC LIMIT 1";
+
+            using (var connection = new MySqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                var maxAssetCode = await connection.QueryFirstOrDefaultAsync<string?>(sqlCommand);
+                return maxAssetCode;
             }
         }
     }

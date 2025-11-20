@@ -44,10 +44,10 @@ namespace Misa.AssetManagement.Core.Dtos
 
         [MISARequired("Không được để trống")]
         [MISAColumnName("department_id")]
-        public string DepartmentId { get; set; }
+        public Guid DepartmentId { get; set; }
 
         [MISARequired("Không được để trống")]
         [MISAColumnName("asset_type_id")]
-        public string AssetTypeId { get; set; }
+        public Guid AssetTypeId { get; set; }
     }
 }

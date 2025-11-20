@@ -108,5 +108,21 @@ namespace Misa.AssetManagement.API.Controllers
             await assetService.DeleteAsync(id);
             return NoContent();
         }
+
+        /// <summary>
+        /// Lấy mã tài sản mới tự động
+        /// </summary>
+        /// <returns>Mã tài sản mới</returns>
+        /// Created by: CongHT - 20/11/2025
+        [HttpGet("new-code")]
+        public async Task<IActionResult> GetNewAssetCode()
+        {
+            var newCode = await assetService.GenerateNewAssetCodeAsync();
+            var response = ResponseDto<string>.SuccessResponse(
+                data: newCode,
+                userMessage: "Lấy mã tài sản mới thành công"
+            );
+            return Ok(response);
+        }
     }
 }
